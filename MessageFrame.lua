@@ -1,63 +1,57 @@
-local fontPath = "Interface\\AddOns\\CritlineClassicX\\fonts\\8bit.ttf" 
+local AceGUI = LibStub("AceGUI-3.0")
+
 function CritlineClassicX.CreateMessageFrame(color)
-  local f = CreateFrame("Frame", nil, UIParent)
-  f:SetPoint("CENTER", UIParent, "CENTER")
-  f:SetSize(400, 50)
-  f:SetMovable(true)
-  f:EnableMouse(true)
-  f:SetScript("OnMouseDown", f.StartMoving)
-  f:SetScript("OnMouseUp", f.StopMovingOrSizing)
-  f:SetScript("OnHide", f.StopMovingOrSizing)
+  local f = AceGUI:Create("Frame")
+  f:SetTitle("")
+  f:SetStatusText("")
+  f:SetLayout("Flow")
+  f:SetWidth(400)
+  f:SetHeight(50)
+  f:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
 
   -- Set the frame level to a high value.
-  f:SetFrameStrata("TOOLTIP")  -- This is the highest built-in strata.
-  f:SetFrameLevel(20)  -- Increase this number if necessary.
- 
-  local text = f:CreateFontString(nil, "OVERLAY")
+  f.frame:SetFrameStrata("TOOLTIP")  -- This is the highest built-in strata.
+  f.frame:SetFrameLevel(20)  -- Increase this number if necessary.
+
+  local text = AceGUI:Create("Label")
   text:SetFont(fontPath, 20, "THICKOUTLINE")
+  text:SetColor(1, 1, 1)
   text:SetShadowOffset(3, -3)
-  text:SetPoint("CENTER", f, "CENTER")
-  f.text = text
+  text:SetJustifyH("CENTER")
+  text:SetJustifyV("CENTER")
+  text:SetText("")
+  f:AddChild(text)
+
+  -- Add shake animation to the frame
+  local shake = AceGUI:Create("AnimationGroup")
+  local shake1 = shake:Create("Translation")
+  shake1:SetDuration(0.05)
+  shake1:SetOffset(5, 0)
+  local shake2 = shake:Create("Translation")
+  shake2:SetDuration(0.05)
+  shake2:SetOffset(-5, 0)
+  local shake3 = shake:Create("Translation")
+  shake3:SetDuration(0.05)
+  shake3:SetOffset(0, 5)
+  local shake4 = shake:Create("Translation")
+  shake4:SetDuration(0.05)
+  shake4:SetOffset(0, -5)
+  shake:SetLooping("REPEAT")
+  shake:AddChild(shake1)
+  shake:AddChild(shake2)
+  shake:AddChild(shake3)
+  shake:AddChild(shake4)
+  f.shake = shake
+
+  -- Add the shake animation to the text label
+  text:SetCallback("OnEnter", function(widget)
+    widget:GetParent().shake:Play()
+  end)
+  text:SetCallback("OnLeave", function(widget)
+    widget:GetParent().shake:Stop()
+    widget:GetParent().frame:ClearAllPoints()
+    widget:GetParent().frame:SetPoint("CENTER", UIParent, "CENTER")
+  end)
 
   return f
-end
-
-function CritlineClassicX.ShowNewCritMessage(spellName, amount)
-  if not CritlineClassicXMessageFrame then
-    CritlineClassicXMessageFrame = CritlineClassicX.CreateMessageFrame()
-  end
-  CritlineClassicXMessageFrame.text:SetTextColor(1, 0.84, 0) -- Set text color to gold
-  CritlineClassicXMessageFrame.text:SetText(string.upper(string.format("New %s crit: %d!", spellName, amount)))
-  CritlineClassicXMessageFrame:Show()
-  C_Timer.After(8, function() CritlineClassicXMessageFrame:Hide() end)
-end
-
-function CritlineClassicX.ShowNewNormalMessage(spellName, amount)
-  if not CritlineClassicXMessageFrame then
-    CritlineClassicXMessageFrame = CritlineClassicX.CreateMessageFrame("white")
-  end
-  CritlineClassicXMessageFrame.text:SetTextColor(1, 1, 1)
-  CritlineClassicXMessageFrame.text:SetText(string.upper(string.format("New %s normal record: %d!", spellName, amount)))
-  CritlineClassicXMessageFrame:Show()
-  C_Timer.After(8, function() CritlineClassicXMessageFrame:Hide() end)
-end
-
-function CritlineClassicX.ShowNewHealMessage(spellName, amount)
-  if not CritlineClassicXMessageFrame then
-    CritlineClassicXMessageFrame = CritlineClassicX.CreateMessageFrame("white")
-  end
-  CritlineClassicXMessageFrame.text:SetTextColor(1, 1, 1)
-  CritlineClassicXMessageFrame.text:SetText(string.upper(string.format("New %s normal heal record: %d!", spellName, amount)))
-  CritlineClassicXMessageFrame:Show()
-  C_Timer.After(8, function() CritlineClassicXMessageFrame:Hide() end)
-end
-
-function CritlineClassicX.ShowNewHealCritMessage(spellName, amount)
-  if not CritlineXClassicMessageFrame then
-    CritlineClassicXMessageFrame = CritlineClassicX.CreateMessageFrame()
-  end
-  CritlineClassicXMessageFrame.text:SetTextColor(1, 0.84, 0) -- Set text color to gold
-  CritlineClassicXMessageFrame.text:SetText(string.upper(string.format("New %s crit heal: %d!", spellName, amount)))
-  CritlineClassicXMessageFrame:Show()
-  C_Timer.After(8, function() CritlineClassicXMessageFrame:Hide() end)
 end

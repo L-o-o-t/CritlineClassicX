@@ -1,11 +1,15 @@
 ## Interface: 30401
 ## Title: Critline-Classic
-## Author: Loot and someone 
+## Author: Loot
 ## Version: 1.0.0
 ## Notes: Records the highest critical hit for the player.
 ## DefaultState: enabled
 ## SavedVariablesPerCharacter: CritlineClassicDataX
 
+
+Libs\LibStub\LibStub.lua
+Libs\AceGUI-3.0\AceGUI-3.0.lua
+Libs\AceTimer-3.0\AceTimer-3.0.lua
 Namespace.lua
 MessageFrame.lua
 CritlineClassicX.lua
