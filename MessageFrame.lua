@@ -1,7 +1,7 @@
 local fontPath = "Interface\\AddOns\\CritlineClassicX\\fonts\\8bit.ttf" 
 function CritlineClassicX.CreateMessageFrame(color)
   local f = CreateFrame("Frame", nil, UIParent)
-  f:SetPoint("CENTER", UIParent, "CENTER")
+  f:SetPoint("CENTER", UIParent, "CENTER", 0, 250)
   f:SetSize(400, 50)
   f:SetMovable(true)
   f:EnableMouse(true)
