@@ -94,6 +94,9 @@ f:SetScript("OnEvent", function(self, event)
       if critical then
         if eventType == "SPELL_HEAL" or eventType == "SPELL_PERIODIC_HEAL" then
           if amount > CritlineClassicXData[spellName].highestHealCrit then
+            if spellName == "Auto Attack" then
+              return
+            end
             CritlineClassicXData[spellName].highestHealCrit = amount
             PlaySound(888, "SFX")
             CritlineClassicX.ShowNewHealCritMessage(spellName , amount)
@@ -101,6 +104,9 @@ f:SetScript("OnEvent", function(self, event)
           end
         else
           if amount > CritlineClassicXData[spellName].highestCrit then
+            if spellName == "Auto Attack" then
+              return
+            end
             CritlineClassicXData[spellName].highestCrit = amount
             PlaySound(888, "SFX")
             CritlineClassicX.ShowNewCritMessage(spellName , amount)
@@ -110,6 +116,9 @@ f:SetScript("OnEvent", function(self, event)
       else
         if eventType == "SPELL_HEAL" or eventType == "SPELL_PERIODIC_HEAL" then
           if amount > CritlineClassicXData[spellName].highestHeal then
+            if spellName == "Auto Attack" then
+              return
+            end
             CritlineClassicXData[spellName].highestHeal = amount
             PlaySound(10049, "SFX")
             CritlineClassicX.ShowNewHealMessage(spellName , amount)
@@ -117,6 +126,9 @@ f:SetScript("OnEvent", function(self, event)
           end
         else
           if amount > CritlineClassicXData[spellName].highestNormal then
+            if spellName == "Auto Attack" then
+              return
+            end
             CritlineClassicXData[spellName].highestNormal = amount
             PlaySound(10049, "SFX")
             CritlineClassicX.ShowNewNormalMessage(spellName , amount)

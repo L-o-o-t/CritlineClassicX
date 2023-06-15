@@ -23,6 +23,9 @@ function CritlineClassicX.CreateMessageFrame(color)
 end
 
 function CritlineClassicX.ShowNewCritMessage(spellName, amount)
+  if spellName == "Auto Attack" then
+    return
+  end
   if not CritlineClassicXMessageFrame then
     CritlineClassicXMessageFrame = CritlineClassicX.CreateMessageFrame()
   end
@@ -33,6 +36,9 @@ function CritlineClassicX.ShowNewCritMessage(spellName, amount)
 end
 
 function CritlineClassicX.ShowNewNormalMessage(spellName, amount)
+  if spellName == "Auto Attack" then
+    return
+  end
   if not CritlineClassicXMessageFrame then
     CritlineClassicXMessageFrame = CritlineClassicX.CreateMessageFrame("white")
   end
@@ -43,6 +49,9 @@ function CritlineClassicX.ShowNewNormalMessage(spellName, amount)
 end
 
 function CritlineClassicX.ShowNewHealMessage(spellName, amount)
+  if spellName == "Auto Attack" then
+    return
+  end
   if not CritlineClassicXMessageFrame then
     CritlineClassicXMessageFrame = CritlineClassicX.CreateMessageFrame("white")
   end
@@ -53,6 +62,9 @@ function CritlineClassicX.ShowNewHealMessage(spellName, amount)
 end
 
 function CritlineClassicX.ShowNewHealCritMessage(spellName, amount)
+  if spellName == "Auto Attack" then
+    return
+  end
   if not CritlineXClassicMessageFrame then
     CritlineClassicXMessageFrame = CritlineClassicX.CreateMessageFrame()
   end
