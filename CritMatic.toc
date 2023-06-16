@@ -1,11 +1,10 @@
 ## Interface: 30401
-## Title: Critline-Classic
-## Author: Loot and someone 
-## Version: 1.0.0
-## Notes: Records the highest critical hit for the player.
+## Title: CritMatic
+## Author: InfiniteLøøpAlchemist
+## Version: 0.0.1
+## Notes: Records the highest critical hits and Normals for the player.
 ## DefaultState: enabled
-## SavedVariablesPerCharacter: CritlineClassicDataX
-
+## SavedVariablesPerCharacter: CritMaticData
 Namespace.lua
 MessageFrame.lua
 CritMatic.lua

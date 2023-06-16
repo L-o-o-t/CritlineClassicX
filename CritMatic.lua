@@ -48,8 +48,7 @@ local function AddHighestHitsToTooltip(self, slot)
 
       -- If lines don't exist, add them.
       if not critMaticExists then
-        self:AddDoubleLine(CritMaticLeft
-, CritMaticRight)
+        self:AddDoubleLine(CritMaticLeft, CritMaticRight)
         _G["GameTooltipTextLeft"..self:NumLines()]:SetTextColor(1, 1, 1) -- left side color (white)
         _G["GameTooltipTextRight"..self:NumLines()]:SetTextColor(1, 0.82, 0) -- right side color (white)
       end
@@ -144,7 +143,7 @@ end)
 
 -- Register an event that fires when the addon is loaded.
 local function OnLoad(self, event)
-  print("Critline Classic Loaded!")
+  print("CritMatic Loaded!")
 
   CritMaticData = _G["CritMaticData"]
   

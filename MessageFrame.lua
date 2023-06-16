@@ -1,5 +1,5 @@
-local fontPath = "Interface\\AddOns\\CritlineClassicX\\fonts\\8bit.ttf" 
-function CritlineClassicX.CreateMessageFrame(color)
+local fontPath = "Interface\\AddOns\\CritMatic\\fonts\\8bit.ttf" 
+function CritMatic.CreateMessageFrame(color)
   local f = CreateFrame("Frame", nil, UIParent)
   f:SetPoint("CENTER", UIParent, "CENTER", 0, 250)
   f:SetSize(400, 50)
@@ -22,54 +22,54 @@ function CritlineClassicX.CreateMessageFrame(color)
   return f
 end
 
-function CritlineClassicX.ShowNewCritMessage(spellName, amount)
+function CritMatic.ShowNewCritMessage(spellName, amount)
   if spellName == "Auto Attack" then
     return
   end
-  if not CritlineClassicXMessageFrame then
-    CritlineClassicXMessageFrame = CritlineClassicX.CreateMessageFrame()
+  if not CritMaticMessageFrame then
+    CritMaticMessageFrame = CritMatic.CreateMessageFrame()
   end
-  CritlineClassicXMessageFrame.text:SetTextColor(1, 0.84, 0) -- Set text color to gold
-  CritlineClassicXMessageFrame.text:SetText(string.upper(string.format("New %s crit: %d!", spellName, amount)))
-  CritlineClassicXMessageFrame:Show()
-  C_Timer.After(8, function() CritlineClassicXMessageFrame:Hide() end)
+  CritMaticMessageFrame.text:SetTextColor(1, 0.84, 0) -- Set text color to gold
+  CritMaticMessageFrame.text:SetText(string.upper(string.format("New %s crit: %d!", spellName, amount)))
+  CritMaticMessageFrame:Show()
+  C_Timer.After(8, function() CritMaticMessageFrame:Hide() end)
 end
 
-function CritlineClassicX.ShowNewNormalMessage(spellName, amount)
+function CritMatic.ShowNewNormalMessage(spellName, amount)
   if spellName == "Auto Attack" then
     return
   end
-  if not CritlineClassicXMessageFrame then
-    CritlineClassicXMessageFrame = CritlineClassicX.CreateMessageFrame("white")
+  if not CritMaticMessageFrame then
+    CritMaticMessageFrame = CritMatic.CreateMessageFrame("white")
   end
-  CritlineClassicXMessageFrame.text:SetTextColor(1, 1, 1)
-  CritlineClassicXMessageFrame.text:SetText(string.upper(string.format("New %s normal record: %d!", spellName, amount)))
-  CritlineClassicXMessageFrame:Show()
-  C_Timer.After(8, function() CritlineClassicXMessageFrame:Hide() end)
+  CritMaticMessageFrame.text:SetTextColor(1, 1, 1)
+  CritMaticMessageFrame.text:SetText(string.upper(string.format("New %s normal record: %d!", spellName, amount)))
+  CritMaticMessageFrame:Show()
+  C_Timer.After(8, function() CritMaticMessageFrame:Hide() end)
 end
 
-function CritlineClassicX.ShowNewHealMessage(spellName, amount)
+function CritMatic.ShowNewHealMessage(spellName, amount)
   if spellName == "Auto Attack" then
     return
   end
-  if not CritlineClassicXMessageFrame then
-    CritlineClassicXMessageFrame = CritlineClassicX.CreateMessageFrame("white")
+  if not CritMaticMessageFrame then
+    CritMaticMessageFrame = CritMatic.CreateMessageFrame("white")
   end
-  CritlineClassicXMessageFrame.text:SetTextColor(1, 1, 1)
-  CritlineClassicXMessageFrame.text:SetText(string.upper(string.format("New %s normal heal record: %d!", spellName, amount)))
-  CritlineClassicXMessageFrame:Show()
-  C_Timer.After(8, function() CritlineClassicXMessageFrame:Hide() end)
+  CritMaticMessageFrame.text:SetTextColor(1, 1, 1)
+  CritMaticMessageFrame.text:SetText(string.upper(string.format("New %s normal heal record: %d!", spellName, amount)))
+  CritMaticMessageFrame:Show()
+  C_Timer.After(8, function() CritMaticMessageFrame:Hide() end)
 end
 
-function CritlineClassicX.ShowNewHealCritMessage(spellName, amount)
+function CritMatic.ShowNewHealCritMessage(spellName, amount)
   if spellName == "Auto Attack" then
     return
   end
   if not CritlineXClassicMessageFrame then
-    CritlineClassicXMessageFrame = CritlineClassicX.CreateMessageFrame()
+    CritMaticMessageFrame = CritMatic.CreateMessageFrame()
   end
-  CritlineClassicXMessageFrame.text:SetTextColor(1, 0.84, 0) -- Set text color to gold
-  CritlineClassicXMessageFrame.text:SetText(string.upper(string.format("New %s crit heal: %d!", spellName, amount)))
-  CritlineClassicXMessageFrame:Show()
-  C_Timer.After(8, function() CritlineClassicXMessageFrame:Hide() end)
+  CritMaticMessageFrame.text:SetTextColor(1, 0.84, 0) -- Set text color to gold
+  CritMaticMessageFrame.text:SetText(string.upper(string.format("New %s crit heal: %d!", spellName, amount)))
+  CritMaticMessageFrame:Show()
+  C_Timer.After(8, function() CritMaticMessageFrame:Hide() end)
 end
