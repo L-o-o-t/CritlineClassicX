@@ -8,5 +8,5 @@
 
 Namespace.lua
 MessageFrame.lua
-CritlineClassicX.lua
+CritMatic.lua
 fonts\8bit.ttf

@@ -1,5 +1,5 @@
 -- Define a table to hold the highest hits data.
-CritlineClassicXData = CritlineClassicXData or {}
+CritMaticData = CritMaticData or {}
 
 local function GetGCD()
   local _, gcdDuration = GetSpellCooldown(78) -- 78 is the spell ID for Warrior's Heroic Strike
@@ -16,44 +16,46 @@ local function AddHighestHitsToTooltip(self, slot)
   local actionType, id = GetActionInfo(slot)
   if actionType == "spell" then
     local spellName, _, _, castTime = GetSpellInfo(id)
-    if CritlineClassicXData[spellName] then
+    if CritMaticData[spellName] then
       local cooldown = (GetSpellBaseCooldown(id) or 0) / 1000
       local effectiveCastTime = castTime > 0 and (castTime / 1000) or GetGCD()
       local effectiveTime = max(effectiveCastTime, cooldown)
 
-      local critDPS = CritlineClassicXData[spellName].highestCrit / effectiveTime
-      local normalDPS = CritlineClassicXData[spellName].highestNormal / effectiveTime
+      local critDPS = CritMaticData[spellName].highestCrit / effectiveTime
+      local normalDPS = CritMaticData[spellName].highestNormal / effectiveTime
 
-      local critLineLeft = "Highest Crit: "
-      local critLineRight = tostring(CritlineClassicXData[spellName].highestCrit) .. " (" .. format("%.1f", critDPS) .. " DPS)"
-      local normalLineLeft = "Highest Normal: "
-      local normalLineRight = tostring(CritlineClassicXData[spellName].highestNormal) .. " (" .. format("%.1f", normalDPS) .. " DPS)"
+      local CritMaticLeft = "Highest Crit: "
+      local CritMaticRight = tostring(CritMaticData[spellName].highestCrit) .. " (" .. format("%.1f", critDPS) .. " DPS)"
+      local normalMaticLeft = "Highest Normal: "
+      local normalMaticRight = tostring(CritMaticData[spellName].highestNormal) .. " (" .. format("%.1f", normalDPS) .. " DPS)"
 
       -- Check if lines are already present in the tooltip.
-      local critLineExists = false
-      local normalLineExists = false
+      local critMaticExists = false
+      local normalMaticExists = false
 
       for i=1, self:NumLines() do
         local gtl = _G["GameTooltipTextLeft"..i]
         local gtr = _G["GameTooltipTextRight"..i]
         if gtl and gtr then
-          if gtl:GetText() == critLineLeft and gtr:GetText() == critLineRight then
-            critLineExists = true
-          elseif gtl:GetText() == normalLineLeft and gtr:GetText() == normalLineRight then
-            normalLineExists = true
+          if gtl:GetText() == CritMaticLeft
+          and gtr:GetText() == CritMaticRight then
+            critMaticExists = true
+          elseif gtl:GetText() == normalMaticLeft and gtr:GetText() == normalMaticRight then
+            normalMaticExists = true
           end
         end
       end
 
       -- If lines don't exist, add them.
-      if not critLineExists then
-        self:AddDoubleLine(critLineLeft, critLineRight)
+      if not critMaticExists then
+        self:AddDoubleLine(CritMaticLeft
+, CritMaticRight)
         _G["GameTooltipTextLeft"..self:NumLines()]:SetTextColor(1, 1, 1) -- left side color (white)
         _G["GameTooltipTextRight"..self:NumLines()]:SetTextColor(1, 0.82, 0) -- right side color (white)
       end
 
-      if not normalLineExists then
-        self:AddDoubleLine(normalLineLeft, normalLineRight)
+      if not normalMaticExists then
+        self:AddDoubleLine(normalMaticLeft, normalMaticRight)
         _G["GameTooltipTextLeft"..self:NumLines()]:SetTextColor(1, 1, 1) -- left side color (white)
         _G["GameTooltipTextRight"..self:NumLines()]:SetTextColor(1, 0.82, 0) -- right side color (white)
       end
@@ -84,7 +86,7 @@ f:SetScript("OnEvent", function(self, event)
     and amount > 0 then
 
     if spellName then
-      CritlineClassicXData[spellName] = CritlineClassicXData[spellName] or {
+      CritMaticData[spellName] = CritMaticData[spellName] or {
         highestCrit = 0,
         highestNormal = 0,
         highestHeal = 0,
@@ -93,46 +95,46 @@ f:SetScript("OnEvent", function(self, event)
       }
       if critical then
         if eventType == "SPELL_HEAL" or eventType == "SPELL_PERIODIC_HEAL" then
-          if amount > CritlineClassicXData[spellName].highestHealCrit then
+          if amount > CritMaticData[spellName].highestHealCrit then
             if spellName == "Auto Attack" then
               return
             end
-            CritlineClassicXData[spellName].highestHealCrit = amount
+            CritMaticData[spellName].highestHealCrit = amount
             PlaySound(888, "SFX")
-            CritlineClassicX.ShowNewHealCritMessage(spellName , amount)
-            print("New highest crit heal for " .. spellName .. ": " .. CritlineClassicXData[spellName].highestHealCrit)
+            CritMatic.ShowNewHealCritMessage(spellName , amount)
+            print("New highest crit heal for " .. spellName .. ": " .. CritMaticData[spellName].highestHealCrit)
           end
         else
-          if amount > CritlineClassicXData[spellName].highestCrit then
+          if amount > CritMaticData[spellName].highestCrit then
             if spellName == "Auto Attack" then
               return
             end
-            CritlineClassicXData[spellName].highestCrit = amount
+            CritMaticData[spellName].highestCrit = amount
             PlaySound(888, "SFX")
-            CritlineClassicX.ShowNewCritMessage(spellName , amount)
-            print("New highest crit hit for " .. spellName .. ": " .. CritlineClassicXData[spellName].highestCrit)
+            CritMatic.ShowNewCritMessage(spellName , amount)
+            print("New highest crit hit for " .. spellName .. ": " .. CritMaticData[spellName].highestCrit)
           end
         end
       else
         if eventType == "SPELL_HEAL" or eventType == "SPELL_PERIODIC_HEAL" then
-          if amount > CritlineClassicXData[spellName].highestHeal then
+          if amount > CritMaticData[spellName].highestHeal then
             if spellName == "Auto Attack" then
               return
             end
-            CritlineClassicXData[spellName].highestHeal = amount
+            CritMaticData[spellName].highestHeal = amount
             PlaySound(10049, "SFX")
-            CritlineClassicX.ShowNewHealMessage(spellName , amount)
-            print("New highest normal heal for " .. spellName .. ": " .. CritlineClassicXData[spellName].highestHeal)
+            CritMatic.ShowNewHealMessage(spellName , amount)
+            print("New highest normal heal for " .. spellName .. ": " .. CritMaticData[spellName].highestHeal)
           end
         else
-          if amount > CritlineClassicXData[spellName].highestNormal then
+          if amount > CritMaticData[spellName].highestNormal then
             if spellName == "Auto Attack" then
               return
             end
-            CritlineClassicXData[spellName].highestNormal = amount
+            CritMaticData[spellName].highestNormal = amount
             PlaySound(10049, "SFX")
-            CritlineClassicX.ShowNewNormalMessage(spellName , amount)
-            print("New highest normal hit for " .. spellName .. ": " .. CritlineClassicXData[spellName].highestNormal)
+            CritMatic.ShowNewNormalMessage(spellName , amount)
+            print("New highest normal hit for " .. spellName .. ": " .. CritMaticData[spellName].highestNormal)
           end
         end
       end
@@ -144,7 +146,7 @@ end)
 local function OnLoad(self, event)
   print("Critline Classic Loaded!")
 
-  CritlineClassicXData = _G["CritlineClassicXData"]
+  CritMaticData = _G["CritMaticData"]
   
   -- Add the highest hits data to the spell button tooltip.
   hooksecurefunc(GameTooltip, "SetAction", AddHighestHitsToTooltip)
@@ -156,18 +158,18 @@ frame:SetScript("OnEvent", OnLoad)
 -- Register an event that fires when the player logs out or exits the game.
 local function OnSave(self, event)
   -- Save the highest hits data to the saved variables for the addon.
-  _G["CritlineClassicXData"] = CritlineClassicXData
+  _G["CritMaticData"] = CritMaticData
 end
 local frame = CreateFrame("FRAME")
 frame:RegisterEvent("PLAYER_LOGOUT")
 frame:SetScript("OnEvent", OnSave)
 
 local function ResetData()
-  CritlineClassicXData = {}
-  print("Critline Classic data reset.")
+  CritMaticData = {}
+  print("CritMatic data reset.")
 end
 
-SLASH_CRITLINERESET1 = '/clreset'
+SLASH_CRITLINERESET1 = '/cmreset'
 function SlashCmdList.CRITLINERESET(msg, editBox)
     ResetData()
 end
