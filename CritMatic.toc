@@ -8,4 +8,5 @@
 Namespace.lua
 MessageFrame.lua
 CritMatic.lua
-fonts\8bit.ttf
+Fonts\8bit.ttf
+Embeds.xml

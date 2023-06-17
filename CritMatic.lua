@@ -1,5 +1,9 @@
 -- Define a table to hold the highest hits data.
 CritMaticData = CritMaticData or {}
+critMatic = LibStub("AceAddon-3.0"):NewAddon("critMatic", "AceConsole-3.0")
+
+
+
 
 local function GetGCD()
   local _, gcdDuration = GetSpellCooldown(78) -- 78 is the spell ID for Warrior's Heroic Strike
@@ -140,19 +144,13 @@ f:SetScript("OnEvent", function(self, event)
     end
   end
 end)
-
--- Register an event that fires when the addon is loaded.
-local function OnLoad(self, event)
-  print("CritMatic Loaded!")
-
+local function critMatic:OnInitialize()
+  -- Called when the addon is loaded
+  critMatic:Print("CritMatic Loaded!")
   CritMaticData = _G["CritMaticData"]
-  
   -- Add the highest hits data to the spell button tooltip.
   hooksecurefunc(GameTooltip, "SetAction", AddHighestHitsToTooltip)
 end
-local frame = CreateFrame("FRAME")
-frame:RegisterEvent("ADDON_LOADED")
-frame:SetScript("OnEvent", OnLoad)
 
 -- Register an event that fires when the player logs out or exits the game.
 local function OnSave(self, event)
