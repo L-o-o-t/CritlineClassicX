@@ -1,7 +1,7 @@
 -- Define a table to hold the highest hits data.
 CritMaticData = CritMaticData or {}
+critMatic = LibStub("AceAddon-3.0"):NewAddon("critMatic", "AceConsole-3.0")
 
-A = LibStub("AceAddon-3.0"):NewAddon("CritMatic", "AceConsole-3.0")
 
 
 
@@ -144,9 +144,9 @@ f:SetScript("OnEvent", function(self, event)
     end
   end
 end)
-local function A:OnInitialize()
+local function critMatic:OnInitialize()
   -- Called when the addon is loaded
-  print("CritMatic Loaded!")
+  critMatic:Print("CritMatic Loaded!")
   CritMaticData = _G["CritMaticData"]
   -- Add the highest hits data to the spell button tooltip.
   hooksecurefunc(GameTooltip, "SetAction", AddHighestHitsToTooltip)
