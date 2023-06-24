@@ -1,7 +1,7 @@
 ## Interface: 30401
 ## Title: CritMatic
 ## Author: InfiniteLøøpAlchemist
-## Version: 0.0.1
+## Version: 0.0.2
 ## Notes: Records the highest critical hits and Normals for the player.
 ## DefaultState: enabled
 ## SavedVariablesPerCharacter: CritMaticData

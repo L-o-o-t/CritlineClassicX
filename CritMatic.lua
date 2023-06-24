@@ -37,8 +37,7 @@ local function AddHighestHitsToTooltip(self, slot)
         local gtl = _G["GameTooltipTextLeft"..i]
         local gtr = _G["GameTooltipTextRight"..i]
         if gtl and gtr then
-          if gtl:GetText() == CritMaticLeft
-          and gtr:GetText() == CritMaticRight then
+          if gtl:GetText() == CritMaticLeft and gtr:GetText() == CritMaticRight then
             critMaticExists = true
           elseif gtl:GetText() == normalMaticLeft and gtr:GetText() == normalMaticRight then
             normalMaticExists = true
@@ -92,7 +91,10 @@ f:SetScript("OnEvent", function(self, event)
         highestHealCrit = 0,
         spellIcon = spellIcon,
       }
+      print(critical)
       if critical then
+        print(eventType == "SPELL_HEAL")
+        print(eventType == "SPELL_PERIODIC_HEAL")
         if eventType == "SPELL_HEAL" or eventType == "SPELL_PERIODIC_HEAL" then
           if amount > CritMaticData[spellName].highestHealCrit then
             if spellName == "Auto Attack" then

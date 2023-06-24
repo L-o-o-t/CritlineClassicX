@@ -65,7 +65,7 @@ function CritMatic.ShowNewHealCritMessage(spellName, amount)
   if spellName == "Auto Attack" then
     return
   end
-  if not CritlineXClassicMessageFrame then
+  if not CritMaticMessageFrame then
     CritMaticMessageFrame = CritMatic.CreateMessageFrame()
   end
   CritMaticMessageFrame.text:SetTextColor(1, 0.84, 0) -- Set text color to gold
