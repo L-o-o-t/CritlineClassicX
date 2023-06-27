@@ -1,4 +1,4 @@
-## Interface: 30401
+## Interface: 30402
 ## Title: CritMatic
 ## Author: InfiniteLøøpAlchemist
 ## Version: 0.0.2
@@ -8,5 +8,5 @@
 Namespace.lua
 MessageFrame.lua
 CritMatic.lua
-Fonts\8bit.ttf
+Fonts/8Bit.ttf
 Embeds.xml
